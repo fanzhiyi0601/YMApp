@@ -25,10 +25,10 @@ public class LoginController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     @ResponseBody
-    public String create() throws Exception{
+    public String login() throws Exception{
         LoginModel loginModel = new LoginModel();
         loginModel.setUsername("fanzhiyi");
-        loginModel.setPassword("123");
+        loginModel.setPassword("13");
         int result = loginService.login(loginModel);
         if(result==1) {
             return "success";
@@ -39,7 +39,7 @@ public class LoginController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
-    public String login() {
+    public String home() {
 
         Map map = new HashMap();
 
@@ -47,7 +47,7 @@ public class LoginController {
 
         map.put("data", "�������ǿ�");
 
-        return "login";
+        return "home";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
