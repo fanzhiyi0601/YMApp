@@ -5,6 +5,7 @@ public class LoginModel {
 
     private String username;
     private String password;
+    private boolean isAgree;
 
     public String getUsername() {
         return username;
@@ -22,4 +23,7 @@ public class LoginModel {
         this.password = password;
     }
 
+    public boolean isAgree() { return isAgree; }
+
+    public void setAgree(boolean agree) { isAgree = agree; }
 }
