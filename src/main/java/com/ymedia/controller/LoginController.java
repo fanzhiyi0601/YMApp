@@ -30,12 +30,12 @@ public class LoginController {
 
     @Autowired
     LoginService loginService;
-//    LoginServiceImpl loginService = new LoginServiceImpl();
 
     @Autowired
     RegisterService registerService;
 
     Gson gson = new Gson();
+
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
@@ -44,8 +44,9 @@ public class LoginController {
         String param = URLDecoder.decode(request, "utf-8");
         LoginModel loginModel;
         loginModel = gson.fromJson(param.substring(0,param.length()-1), LoginModel.class);
+
         logger.info(loginModel.getUsername()+"登录中！");
-//
+
         int result = loginService.login(loginModel);
         if(result==1) {
             return "success";
@@ -62,7 +63,9 @@ public class LoginController {
         RegisterModel registerModel;
         String param1 = param.substring(0,param.length()-1);
         registerModel = gson.fromJson(param1, RegisterModel.class);
+
         logger.info(registerModel.getUsername()+"注册中！");
+
         return registerService.register(registerModel);
     }
 }
