@@ -8,7 +8,7 @@ import java.util.List;
 
 public class test {
 
-    @Test
+    //@Test
     public void test() throws Exception{
         LoginModel loginModel = new LoginModel();
         loginModel.setUsername("fanzhiyi");
