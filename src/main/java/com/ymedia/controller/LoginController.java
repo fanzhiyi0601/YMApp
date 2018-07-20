@@ -27,7 +27,7 @@ public class LoginController {
     @ResponseBody
     public String create() throws Exception{
         LoginModel loginModel = new LoginModel();
-        loginModel.setUsername("fanzhiyi");
+        loginModel.setUsername("fanzhiyi1");
         loginModel.setPassword("123");
         int result = loginService.login(loginModel);
         if(result==1) {
@@ -43,9 +43,9 @@ public class LoginController {
 
         Map map = new HashMap();
 
-        map.put("msg", "����ɹ�");
+        map.put("msg", "1");
 
-        map.put("data", "�������ǿ�");
+        map.put("data", "2");
 
         return "login";
     }

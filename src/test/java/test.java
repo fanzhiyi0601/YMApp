@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class test {
 
-    @Test
+    //@Test
     public void test() throws Exception{
         LoginModel loginModel = new LoginModel();
         loginModel.setUsername("fanzhiyi");

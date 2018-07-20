@@ -29,9 +29,9 @@ public class LoginServiceImpl implements LoginService{
 
     @Override
     public int register(RegisterModel registerModel){
-        //Todo 写入数据库
+        //Todo write into DB
 
-        //if(注册成功)
+        //if(regist success)
         return 1;
         //else
         //return 0;

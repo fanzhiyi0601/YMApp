@@ -31,9 +31,7 @@ public class LoginDAOImpl implements LoginDAO{
             ResultSet rs=ps.executeQuery();
 
             while(rs.next()){                                                      //rs.next()   表示如果结果集rs还有下一条记录，那么返回true；否则，返回false
-
                  passwordDB = rs.getString("password");
-
             }
 
             conn.close();

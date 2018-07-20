@@ -2,7 +2,6 @@ package com.ymedia.model;
 
 public class LoginModel {
 
-
     private String username;
     private String password;
 
