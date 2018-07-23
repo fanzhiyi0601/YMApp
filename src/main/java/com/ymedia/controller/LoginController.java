@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.ymedia.service.LoginService;
 import com.ymedia.service.LoginServiceImpl;
 import com.ymedia.service.RegisterService;
+import com.ymedia.utils.Constant;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,17 @@ public class LoginController {
 
         logger.info(registerModel.getUsername()+"注册中！");
 
-        return registerService.register(registerModel);
+        String result = registerService.register(registerModel);
+
+        if(result.equals(Constant.REGISTER_SUCCESS)) {
+            return "success";
+        }
+        else if(result.equals(Constant.REGISTER_FAILED)){
+            return "fail";
+        }
+        else if(result.equals(Constant.REGISTER_EXIST)){
+            return "exist";
+        }
+            return null;
     }
 }

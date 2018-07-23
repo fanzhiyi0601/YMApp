@@ -21,17 +21,17 @@ public class RegisterServiceImpl implements RegisterService{
 
         List<Map<String, Object>> list = registerDAO.queryUser(registerModel.getUsername());
 
-        if(StringUtils.isBlank(list.get(0).get("username").toString())){
+        if(list.size() == 0 || StringUtils.isBlank(list.get(0).get("username").toString())){
 
             int result = registerDAO.register(registerModel);
 
             if(result==1) {
-                return Constant.REGISTER_SUCCESS;
+                return "success";
             }else {
-                return Constant.REGISTER_FAILED;
+                return "fail";
             }
         }else {
-            return Constant.REGISTER_EXIST;
+            return "exist";
         }
 
     }
