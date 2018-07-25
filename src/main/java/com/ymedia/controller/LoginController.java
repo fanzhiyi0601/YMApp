@@ -75,9 +75,20 @@ public class LoginController {
         else if(result.equals(Constant.REGISTER_FAILED)){
             return "fail";
         }
-        else if(result.equals(Constant.REGISTER_EXIST)){
-            return "exist";
-        }
             return null;
+    }
+
+    @RequestMapping(value = "/check", method = RequestMethod.POST)
+    @ResponseBody
+    public String check(@RequestBody String request) throws Exception{
+        String param = URLDecoder.decode(request, "utf-8");
+        String param1 = param.substring(0,param.length()-1);
+        String result = registerService.checkUsername(param1);
+
+        if(result.equals(Constant.REGISTER_EXIST)){
+            return "exist";
+        }else{
+            return "Unexsit";
+        }
     }
 }

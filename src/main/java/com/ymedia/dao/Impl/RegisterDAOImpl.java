@@ -63,13 +63,9 @@ public class RegisterDAOImpl implements RegisterDAO{
 
         while(rs.next()){
             map.put("username",rs.getString("username"));
-            map.put("password",rs.getString("password"));
-            map.put("telephone",rs.getString("telephone")==null?"":rs.getString("telephone"));
-            map.put("email",rs.getString("email")==null?"":rs.getString("email"));
-
             list.add(map);
 
         }
-        return list==null?null:list;
+        return list;
     }
 }

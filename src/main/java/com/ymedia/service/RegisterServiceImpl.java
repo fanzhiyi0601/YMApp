@@ -17,22 +17,26 @@ public class RegisterServiceImpl implements RegisterService{
     RegisterDAO registerDAO;
 
     @Override
+    public String checkUsername(String username) throws Exception{
+        List<Map<String, Object>> list = registerDAO.queryUser(username);
+        if(list.size() != 0 ){
+            return "exist";
+        }else{
+            return "Unexist";
+        }
+
+    }
+
+    @Override
     public String register(RegisterModel registerModel) throws Exception{
 
-        List<Map<String, Object>> list = registerDAO.queryUser(registerModel.getUsername());
-
-        if(list.size() == 0 || StringUtils.isBlank(list.get(0).get("username").toString())){
-
-            int result = registerDAO.register(registerModel);
+        int result = registerDAO.register(registerModel);
 
             if(result==1) {
                 return "success";
             }else {
                 return "fail";
             }
-        }else {
-            return "exist";
         }
 
-    }
 }
