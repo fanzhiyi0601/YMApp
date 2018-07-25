@@ -8,5 +8,5 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public interface LoginDAO {
-    int login(LoginModel loginModel) throws Exception;
+    long login(LoginModel loginModel) throws Exception;
 }

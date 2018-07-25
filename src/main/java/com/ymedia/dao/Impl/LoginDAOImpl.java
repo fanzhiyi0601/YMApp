@@ -14,9 +14,10 @@ import java.sql.Statement;
 public class LoginDAOImpl implements LoginDAO{
 
     @Override
-    public int login(LoginModel loginModel) throws Exception{
+    public long login(LoginModel loginModel) throws Exception{
 
         DBConnection dbConnection = new DBConnection();
+        long token = 0;
 
         try {
             Connection conn = null;
@@ -32,6 +33,7 @@ public class LoginDAOImpl implements LoginDAO{
 
             while(rs.next()){                                                      //rs.next()   表示如果结果集rs还有下一条记录，那么返回true；否则，返回false
                  passwordDB = rs.getString("password");
+                 token = rs.getLong("token");
             }
 
             conn.close();
@@ -43,6 +45,6 @@ public class LoginDAOImpl implements LoginDAO{
         }catch (Exception e){
             e.printStackTrace();
         }
-        return 1;
+        return token;
     }
 }

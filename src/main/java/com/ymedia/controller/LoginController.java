@@ -48,11 +48,11 @@ public class LoginController {
 
         logger.info(loginModel.getUsername()+"登录中！");
 
-        int result = loginService.login(loginModel);
-        if(result==1) {
-            return "success";
-        }else{
+        String result = loginService.login(loginModel);
+        if(result.equals("0")) {
             return "failed";
+        }else{
+            return result;
         }
     }
 

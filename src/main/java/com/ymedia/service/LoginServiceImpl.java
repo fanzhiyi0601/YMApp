@@ -15,15 +15,15 @@ public class LoginServiceImpl implements LoginService{
 //    LoginDAOImpl loginDAO = new LoginDAOImpl();
 
     @Override
-    public int login(LoginModel loginModel) throws Exception{
+    public String login(LoginModel loginModel) throws Exception{
 
         // 查数据库
-        int result = loginDAO.login(loginModel);
+        long result = loginDAO.login(loginModel);
 
-        if(result == 1) {
-            return 1;
+        if(result == 0) {
+            return "0";
         } else {
-            return 0;
+            return String.valueOf(result);
         }
     }
 

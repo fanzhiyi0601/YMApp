@@ -5,6 +5,6 @@ import com.ymedia.model.RegisterModel;
 
 public interface LoginService {
 
-    int login(LoginModel loginModel) throws Exception;
+    String login(LoginModel loginModel) throws Exception;
     int register(RegisterModel registerModel);
 }
