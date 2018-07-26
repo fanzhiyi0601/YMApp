@@ -35,13 +35,13 @@ public class MainDAOImpl implements MainDAO {
             while(rs.next()){                                                      //rs.next()   表示如果结果集rs还有下一条记录，那么返回true；否则，返回false
                 personInfoModel.setUsername(rs.getString("username"));
                 personInfoModel.setPassword(rs.getString("password"));
-                personInfoModel.setTelephone(rs.getString("telephone"));
-                personInfoModel.setEmail(rs.getString("email"));
-                personInfoModel.setName(rs.getString("name"));
-                personInfoModel.setBirthday(rs.getString("birthday"));
-                personInfoModel.setSex(rs.getString("sex"));
-                personInfoModel.setStatus(rs.getString("status"));
-                personInfoModel.setPersonalInfo(rs.getString("persinal_info"));
+                personInfoModel.setTelephone(rs.getString("telephone")==null?"":rs.getString("telephone"));
+                personInfoModel.setEmail(rs.getString("email")==null?"":rs.getString("email"));
+                personInfoModel.setName(rs.getString("name")==null?"":rs.getString("name"));
+                personInfoModel.setBirthday(rs.getString("birthday")==null?"":rs.getString("birthday"));
+                personInfoModel.setSex(rs.getString("sex")==null?"":rs.getString("sex"));
+                personInfoModel.setStatus(rs.getString("status")==null?"":rs.getString("status"));
+                personInfoModel.setPersonalInfo(rs.getString("persinal_info")==null?"":rs.getString("persinal_info"));
 
                 String json = gson.toJson(personInfoModel);
                 JSONObject jsonObject = new JSONObject(json);
