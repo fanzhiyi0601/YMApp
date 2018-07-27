@@ -54,4 +54,36 @@ public class MainDAOImpl implements MainDAO {
         }
         return null;
     }
+
+    @Override
+    public int savePersonInfo(PersonInfoModel personInfoModel) throws Exception{
+        DBConnection dbConnection = new DBConnection();
+
+        try {
+            Connection conn = null;
+            conn = dbConnection.getConnection(conn);
+            String sql = "insert into client (username, password, telephone, email, name, birthday, status, \n" +
+            "sex, persinal_info) values (?, ?,?,?,?,?,?,?,?)";
+
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1,personInfoModel.getUsername());
+            ps.setString(2,personInfoModel.getPassword());
+            ps.setString(3,personInfoModel.getTelephone());
+            ps.setString(4,personInfoModel.getEmail());
+            ps.setString(5,personInfoModel.getName());
+            ps.setString(6,personInfoModel.getBirthday());
+            ps.setString(7,personInfoModel.getStatus());
+            ps.setString(8,personInfoModel.getSex());
+            ps.setString(9,personInfoModel.getPersonalInfo());
+            ps.executeQuery();
+
+            conn.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 1;
+    }
+
 }
