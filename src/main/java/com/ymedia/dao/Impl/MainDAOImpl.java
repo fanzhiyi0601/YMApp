@@ -62,21 +62,21 @@ public class MainDAOImpl implements MainDAO {
         try {
             Connection conn = null;
             conn = dbConnection.getConnection(conn);
-            String sql = "insert into client (username, password, telephone, email, name, birthday, status, \n" +
-            "sex, persinal_info) values (?, ?,?,?,?,?,?,?,?)";
+            String sql = "UPDATE client set password=?, telephone=?, email=?, name=?, birthday=?, status=?, \n" +
+            "sex=?, persinal_info=? WHERE username = ?";
 
             PreparedStatement ps = null;
             ps = conn.prepareStatement(sql);
 
-            ps.setString(1,personInfoModel.getUsername());
-            ps.setString(2,personInfoModel.getPassword());
-            ps.setString(3,personInfoModel.getTelephone());
-            ps.setString(4,personInfoModel.getEmail());
-            ps.setString(5,personInfoModel.getName());
-            ps.setString(6,personInfoModel.getBirthday());
-            ps.setString(7,personInfoModel.getStatus());
-            ps.setString(8,personInfoModel.getSex());
-            ps.setString(9,personInfoModel.getPersonalInfo());
+            ps.setString(1,personInfoModel.getPassword());
+            ps.setString(2,personInfoModel.getTelephone());
+            ps.setString(3,personInfoModel.getEmail());
+            ps.setString(4,personInfoModel.getName());
+            ps.setString(5,personInfoModel.getBirthday());
+            ps.setString(6,personInfoModel.getStatus());
+            ps.setString(7,personInfoModel.getSex());
+            ps.setString(8,personInfoModel.getPersonalInfo());
+            ps.setString(9,personInfoModel.getUsername());
             ps.executeQuery();
 
             conn.close();

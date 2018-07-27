@@ -37,12 +37,14 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value = "/getPersonInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/savePersonInfo", method = RequestMethod.POST)
     @ResponseBody
     public String savePersonInfo(@RequestBody String request) throws Exception{
 
-        String param = URLDecoder.decode(request, "utf-8");
-        String param1 = param.substring(0,param.length()-1);
+
+       String param = URLDecoder.decode(request, "UTF-8");
+            String  param1 = param.substring(0,param.length()-1);
+
 
         PersonInfoModel personInfoModel;
         personInfoModel = gson.fromJson(param1, PersonInfoModel.class);
