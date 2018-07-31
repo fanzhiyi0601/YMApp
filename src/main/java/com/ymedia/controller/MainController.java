@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 @Controller
 @RequestMapping(value = "/main", produces ="application/json;charset=UTF-8")
@@ -22,7 +23,7 @@ public class MainController {
 
     Gson gson = new Gson();
 
-    @RequestMapping(value = "/getPersonInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/getPersonInfo", method = RequestMethod.POST, produces ="application/json;charset=UTF-8")
     @ResponseBody
     public String getPersonInfo(@RequestBody String request) throws Exception{
 
@@ -37,12 +38,12 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value = "/savePersonInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/savePersonInfo", method = RequestMethod.POST, produces ="application/json;charset=UTF-8")
     @ResponseBody
     public String savePersonInfo(@RequestBody String request) throws Exception{
 
 
-       String param = URLDecoder.decode(request, "UTF-8");
+       String param = URLDecoder.decode(request, "utf-8");
             String  param1 = param.substring(0,param.length()-1);
 
 
