@@ -58,4 +58,20 @@ public class MainController {
         }
     }
 
+    @RequestMapping(value = "/getOnline", method = RequestMethod.POST, produces ="application/json;charset=UTF-8")
+    @ResponseBody
+    public String getOnline(@RequestBody String request) throws Exception{
+
+
+        String param = URLDecoder.decode(request, "utf-8");
+        String  param1 = param.substring(0,param.length()-1);
+
+        String result = mainService.getOnline(param1);
+
+        if(result == null) {
+            return "failed";
+        }else{
+            return result;
+        }
+    }
 }

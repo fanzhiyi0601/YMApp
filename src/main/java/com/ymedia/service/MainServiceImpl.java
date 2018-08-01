@@ -38,4 +38,13 @@ public class MainServiceImpl implements MainService{
             return 0;
         }
     }
+
+    @Override
+    public String getOnline(String token) throws Exception{
+
+        // 查数据库
+        String result = mainDAO.getOnline(token);
+
+        return result;
+    }
 }

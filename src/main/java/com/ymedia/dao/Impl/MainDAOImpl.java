@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class MainDAOImpl implements MainDAO {
 
@@ -86,4 +89,36 @@ public class MainDAOImpl implements MainDAO {
         return 1;
     }
 
+    @Override
+    public String getOnline(String token) throws Exception{
+        DBConnection dbConnection = new DBConnection();
+
+        try {
+            Connection conn = null;
+            conn = dbConnection.getConnection(conn);
+            String sql = "select * from client where token != ? and status = 'true'";
+
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1,token);
+
+            ResultSet rs = ps.executeQuery();
+
+            String username;
+            int i = 0;
+            Map<Integer, String> map = new HashMap<>();
+
+            while(rs.next()){
+                 username = rs.getString("username");
+                 map.put(i++,username);
+            }
+
+            conn.close();
+            return gson.toJson(map);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
