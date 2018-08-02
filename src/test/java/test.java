@@ -2,9 +2,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ymedia.dao.Impl.LoginDAOImpl;
 import com.ymedia.model.LoginModel;
+import com.ymedia.model.PersonInfoModel;
+import com.ymedia.utils.Bean2Map;
+import freemarker.ext.beans.HashAdapter;
+import org.apache.commons.collections.map.HashedMap;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class test {
 
@@ -29,5 +35,16 @@ public class test {
         loginModel = gson.fromJson(str, LoginModel.class);
         System.out.println(loginModel.getUsername());
         System.out.println(loginModel.getPassword());
+    }
+
+    @Test
+    public void test1() throws Exception{
+        Map<String, Object> map = new HashMap<>();
+        map.put("name","123");
+        map.put("username","234");
+
+        Bean2Map bean2Map = new Bean2Map();
+        PersonInfoModel personInfoModel = bean2Map.toBean(PersonInfoModel.class,map);
+        System.out.println(personInfoModel.getName());
     }
 }

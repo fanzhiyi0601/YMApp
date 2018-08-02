@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
@@ -23,13 +24,12 @@ public class MainController {
 
     Gson gson = new Gson();
 
-    @RequestMapping(value = "/getPersonInfo", method = RequestMethod.POST, produces ="application/json;charset=UTF-8")
+    @RequestMapping(value = "/getPersonInfo", method = RequestMethod.POST)
     @ResponseBody
-    public String getPersonInfo(@RequestBody String request) throws Exception{
+    public String getPersonInfo(@RequestBody String request, HttpServletRequest request1) throws Exception{
 
         String param = URLDecoder.decode(request, "utf-8");
         String param1 = param.substring(0,param.length()-1);
-
         JSONObject result = mainService.getPersonInfo(param1);
         if(result == null) {
             return null;
@@ -38,17 +38,15 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value = "/savePersonInfo", method = RequestMethod.POST, produces ="application/json;charset=UTF-8")
+    @RequestMapping(value = "/savePersonInfo", method = RequestMethod.POST)
     @ResponseBody
     public String savePersonInfo(@RequestBody String request) throws Exception{
 
 
        String param = URLDecoder.decode(request, "utf-8");
-            String  param1 = param.substring(0,param.length()-1);
-
 
         PersonInfoModel personInfoModel;
-        personInfoModel = gson.fromJson(param1, PersonInfoModel.class);
+        personInfoModel = gson.fromJson(param, PersonInfoModel.class);
         int result = mainService.savePersonInfo(personInfoModel);
 
         if(result == 1) {

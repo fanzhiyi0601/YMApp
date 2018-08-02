@@ -44,7 +44,7 @@ public class LoginController {
 
         String param = URLDecoder.decode(request, "utf-8");
         LoginModel loginModel;
-        loginModel = gson.fromJson(param.substring(0,param.length()-1), LoginModel.class);
+        loginModel = gson.fromJson(param, LoginModel.class);
 
         logger.info(loginModel.getUsername()+"登录中！");
 
