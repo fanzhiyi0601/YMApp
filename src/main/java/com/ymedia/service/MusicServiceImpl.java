@@ -26,6 +26,18 @@ public class MusicServiceImpl implements MusicService{
     }
 
     @Override
+    public List<Map<String, Object>> getMusicByPage(String page) throws Exception{
+        List<Map<String, Object>> list = musicDAO.getMusicByPage(page);
+
+        if(list.size() != 0 ){
+            return list;
+        }else{
+            return null;
+        }
+
+    }
+
+    @Override
     public List<Map<String, Object>> search(String input) throws Exception{
         List<Map<String, Object>> list = musicDAO.search(input);
 

@@ -29,10 +29,53 @@ public class MusicDAOImpl implements MusicDAO{
         try {
             Connection conn = null;
             conn = dbConnection.getConnection(conn);
-            String sql = "select * from music order by hotorder";
+            String sql = "select * from music order by to_number(hotorder)";
             PreparedStatement ps = null;
             ps = conn.prepareStatement(sql);
 
+            ResultSet rs=ps.executeQuery();
+
+            while(rs.next()){                                                      //rs.next()   表示如果结果集rs还有下一条记录，那么返回true；否则，返回false
+                musicModel.setMusicName(rs.getString("musicName"));
+                musicModel.setSinger(rs.getString("singer"));
+                musicModel.setAlbum(rs.getString("album")==null?"":rs.getString("album"));
+                musicModel.setRecommendation(rs.getString("Recommendation")==null?"":rs.getString("Recommendation"));
+                musicModel.setAuthority(rs.getString("Authority")==null?"":rs.getString("Authority"));
+
+                map = Bean2Map.toMap(musicModel);
+                list.add(map);
+//                String json = gson.toJson(personInfoModel);
+//                JSONObject jsonObject = new JSONObject(json);
+//                return jsonObject;
+            }
+            conn.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public List<Map<String, Object>> getMusicByPage(String page) throws Exception{
+
+        DBConnection dbConnection = new DBConnection();
+        MusicModel musicModel = new MusicModel();
+        Map<String, Object> map = new HashMap<>();
+        List<Map<String, Object>> list = new ArrayList<>();
+        int pageNum = Integer.parseInt(page);
+
+        try {
+            Connection conn = null;
+            conn = dbConnection.getConnection(conn);
+            String sql = "select * from (select rownum as rno,a.* " +
+            "from (select m.* from music m order by to_number(m.HOTORDER)) a) b " +
+            "WHERE b.rno between ? and ?";
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, (pageNum-1)*10+1);
+            ps.setInt(2, (pageNum)*10);
             ResultSet rs=ps.executeQuery();
 
             while(rs.next()){                                                      //rs.next()   表示如果结果集rs还有下一条记录，那么返回true；否则，返回false

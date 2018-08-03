@@ -22,9 +22,23 @@ public class ApplicationController {
 
     @RequestMapping(value = "/getMusic", method = RequestMethod.GET)
     @ResponseBody
-    public List<Map<String, Object>> getPersonInfo(HttpServletRequest request) throws Exception {
+    public List<Map<String, Object>> getMusic(HttpServletRequest request) throws Exception {
 
         List<Map<String, Object>> result = musicService.getMusic();
+
+        if (result == null) {
+            return null;
+        } else {
+            return result;
+        }
+    }
+
+    @RequestMapping(value = "/getMusicByPage", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Map<String, Object>> getMusicByPage(@RequestBody String request) throws Exception {
+
+
+        List<Map<String, Object>> result = musicService.getMusicByPage(request);
 
         if (result == null) {
             return null;

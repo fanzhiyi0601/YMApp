@@ -7,5 +7,7 @@ public interface MusicService {
 
     List<Map<String, Object>> getMusic() throws Exception;
 
+    List<Map<String, Object>> getMusicByPage(String page) throws Exception;
+
     List<Map<String, Object>> search(String input) throws Exception;
 }
