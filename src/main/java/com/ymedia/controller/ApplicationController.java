@@ -105,13 +105,13 @@ public class ApplicationController {
         }
     }
 
-    @RequestMapping(value = "/getChat", method = RequestMethod.POST)
+    @RequestMapping(value = "/getOffline", method = RequestMethod.POST)
     @ResponseBody
-    public String getChat(@RequestBody String request) throws Exception {
+    public List<String> getOffline(@RequestBody String request) throws Exception {
 
         String param = URLDecoder.decode(request, "utf-8");
 
-        String result = chatService.getChat(param);
+        List<String> result = chatService.getOffline(param);
 
         if (result == null) {
             return null;

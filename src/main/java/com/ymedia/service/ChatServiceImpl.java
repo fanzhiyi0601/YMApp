@@ -4,6 +4,8 @@ import com.ymedia.dao.ChatDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ChatServiceImpl implements ChatService{
 
@@ -20,10 +22,10 @@ public class ChatServiceImpl implements ChatService{
     }
 
     @Override
-    public String getChat(String username) throws Exception{
+    public List<String> getOffline(String username) throws Exception{
 
         // 查数据库
-        String result = chatDAO.getChat(username);
+        List<String> result = chatDAO.getOffline(username);
 
         return result;
     }

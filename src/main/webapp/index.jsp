@@ -72,7 +72,7 @@ Welcome<br/>
         var people = document.getElementById('who').value;
         var myDate = new Date()
         var mytime = myDate.toLocaleString()
-        var info = {"from":"lishuopu","to":people,"msg":message,"time": mytime}
+        var info = {"from":"Admin","to":people,"msg":message,"time": mytime}
         info = JSON.stringify(info)
         websocket.send(info);
     }

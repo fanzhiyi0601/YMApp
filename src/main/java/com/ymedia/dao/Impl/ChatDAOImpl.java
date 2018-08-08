@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -75,7 +77,32 @@ public class ChatDAOImpl implements ChatDAO{
     }
 
     @Override
-    public String getChat(String username) throws Exception{
+    public String insertOffline(String sender, String receiver, String msg, String time) throws Exception{
+        DBConnection dbConnection = new DBConnection();
+
+        try {
+            Connection conn = null;
+            conn = dbConnection.getConnection(conn);
+            String sql = "insert into message (sender,receiver,msg, chatTime) VALUES (?, ?, ?, ?)";
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1,sender);
+            ps.setString(2,receiver);
+            ps.setString(3,msg);
+            ps.setString(4,time);
+
+            ps.executeQuery();
+
+            conn.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "insert offline success";
+    }
+
+    @Override
+    public List<String> getOffline(String username) throws Exception{
         DBConnection dbConnection = new DBConnection();
 
         try {
@@ -90,21 +117,21 @@ public class ChatDAOImpl implements ChatDAO{
             ps.setString(1,username);
             pst.setString(1,username);
             ResultSet rs = ps.executeQuery();
-            pst.executeUpdate();
 
             int i = 0;
             Map<Integer, String> map = new HashMap<>();
             String sender, msg, time;
+            List<String> list = new ArrayList<>();
 
             while(rs.next()){
                 sender = rs.getString("sender");
                 msg = rs.getString("msg");
-                time = rs.getString("time");
-                map.put(i++,sender+" ["+time+"] \n"+msg);
+                time = rs.getString("chattime");
+                list.add("来自"+sender+"的离线消息: ["+time+"] <br>"+msg);
             }
-
+            pst.executeUpdate();
             conn.close();
-            return gson.toJson(map);
+            return list;
         }catch (Exception e){
             e.printStackTrace();
         }

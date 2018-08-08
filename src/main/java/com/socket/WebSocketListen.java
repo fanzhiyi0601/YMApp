@@ -1,6 +1,9 @@
 package com.socket;
 
 import com.google.gson.Gson;
+import com.ymedia.dao.ChatDAO;
+import com.ymedia.dao.Impl.ChatDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -24,6 +27,10 @@ public class WebSocketListen {
     private Session session;
 
     private String user = "";
+
+
+    @Autowired
+    ChatDAO chatDAO = new ChatDAOImpl();
 
     /**
      * 连接建立成功调用的方法 
@@ -59,7 +66,7 @@ public class WebSocketListen {
      *            可选的参数 
      */
     @OnMessage
-    public void onMessage(String message, Session session) {
+    public void onMessage(String message, Session session) throws Exception{
         System.out.println("来自客户端的消息:" + message);
         // 群发消息  
 //        for (WebSocketListen item : webSocketSet) {
@@ -77,7 +84,7 @@ public class WebSocketListen {
      * 给指定的人发送消息
      * @param message
      */
-    private void sendToUser(String message) {
+    private void sendToUser(String message) throws Exception{
         Map<String, Object> map = new HashMap<>();
         map = gson.fromJson(message, Map.class);
         String sender = String.valueOf(map.get("from"));
@@ -89,6 +96,8 @@ public class WebSocketListen {
                 webSocketSet.get(reciever).sendMessage("<br>" + sender + ": [" + time + "] <br> " + msg);
             } else {
                 System.out.println("当前用户不在线");
+                webSocketSet.get(sender).sendMessage("<br>当前用户不在线，将以离线消息发送给对方<br>");
+                chatDAO.insertOffline(sender,reciever,msg,time);
             }
         } catch (IOException e) {
             e.printStackTrace();
