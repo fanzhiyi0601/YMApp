@@ -41,6 +41,8 @@ public class MusicDAOImpl implements MusicDAO{
                 musicModel.setAlbum(rs.getString("album")==null?"":rs.getString("album"));
                 musicModel.setRecommendation(rs.getString("Recommendation")==null?"":rs.getString("Recommendation"));
                 musicModel.setAuthority(rs.getString("Authority")==null?"":rs.getString("Authority"));
+                musicModel.setSrc(rs.getString("src")==null?"":rs.getString("src"));
+                musicModel.setLrc(rs.getString("lrc")==null?"":rs.getString("lrc"));
 
                 map = Bean2Map.toMap(musicModel);
                 list.add(map);
@@ -84,6 +86,8 @@ public class MusicDAOImpl implements MusicDAO{
                 musicModel.setAlbum(rs.getString("album")==null?"":rs.getString("album"));
                 musicModel.setRecommendation(rs.getString("Recommendation")==null?"":rs.getString("Recommendation"));
                 musicModel.setAuthority(rs.getString("Authority")==null?"":rs.getString("Authority"));
+                musicModel.setSrc(rs.getString("src")==null?"":rs.getString("src"));
+                musicModel.setLrc(rs.getString("lrc")==null?"":rs.getString("lrc"));
 
                 map = Bean2Map.toMap(musicModel);
                 list.add(map);
@@ -124,6 +128,8 @@ public class MusicDAOImpl implements MusicDAO{
                 musicModel.setAlbum(rs.getString("album")==null?"":rs.getString("album"));
                 musicModel.setRecommendation(rs.getString("Recommendation")==null?"":rs.getString("Recommendation"));
                 musicModel.setAuthority(rs.getString("Authority")==null?"":rs.getString("Authority"));
+                musicModel.setSrc(rs.getString("src")==null?"":rs.getString("src"));
+                musicModel.setLrc(rs.getString("lrc")==null?"":rs.getString("lrc"));
 
                 map = Bean2Map.toMap(musicModel);
                 list.add(map);

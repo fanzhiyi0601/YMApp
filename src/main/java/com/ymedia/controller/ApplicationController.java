@@ -1,5 +1,7 @@
 package com.ymedia.controller;
 
+import com.google.gson.Gson;
+import com.ymedia.service.ChatService;
 import com.ymedia.service.MusicService;
 import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.json.JSONObject;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +19,13 @@ import java.util.Map;
 @RequestMapping(value = "/application")
 public class ApplicationController {
 
+    Gson gson = new Gson();
 
     @Autowired
     MusicService musicService;
+
+    @Autowired
+    ChatService chatService;
 
     @RequestMapping(value = "/getMusic", method = RequestMethod.GET)
     @ResponseBody
@@ -56,6 +63,55 @@ public class ApplicationController {
 
         String param = URLDecoder.decode(request, "utf-8");
         List<Map<String, Object>> result = musicService.search(param);
+
+        if (result == null) {
+            return null;
+        } else {
+            return result;
+        }
+    }
+
+    @RequestMapping(value = "/getChatPeople", method = RequestMethod.POST)
+    @ResponseBody
+    public String getChatPeople(@RequestBody String request) throws Exception {
+
+        String param = URLDecoder.decode(request, "utf-8");
+        String result = chatService.getChatPeople(param);
+
+        if (result == null) {
+            return null;
+        } else {
+            return result;
+        }
+    }
+
+    @RequestMapping(value = "/chat", method = RequestMethod.POST)
+    @ResponseBody
+    public String chat(@RequestBody String request) throws Exception {
+
+        String param = URLDecoder.decode(request, "utf-8");
+        Map<String, Object> map = new HashMap<>();
+        map = gson.fromJson(param, Map.class);
+        String sender = String.valueOf(map.get("from"));
+        String receiver = String.valueOf(map.get("to"));
+        Object message = map.get("msg");
+        String time = String.valueOf(map.get("time"));
+        String result = chatService.getChatPeople(param);
+
+        if (result == null) {
+            return null;
+        } else {
+            return result;
+        }
+    }
+
+    @RequestMapping(value = "/getChat", method = RequestMethod.POST)
+    @ResponseBody
+    public String getChat(@RequestBody String request) throws Exception {
+
+        String param = URLDecoder.decode(request, "utf-8");
+
+        String result = chatService.getChat(param);
 
         if (result == null) {
             return null;

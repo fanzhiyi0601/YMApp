@@ -12,6 +12,8 @@ public class MusicModel {
     private String authority;
     private String internalOrder;
     private String flag;
+    private String src;
+    private String lrc;
 
     public String getType() {
         return type;
@@ -93,4 +95,11 @@ public class MusicModel {
         this.flag = flag;
     }
 
+    public String getSrc() { return src; }
+
+    public void setSrc(String src) { this.src = src; }
+
+    public String getLrc() { return lrc; }
+
+    public void setLrc(String lrc) { this.lrc = lrc; }
 }
